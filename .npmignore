@@ -1,0 +1,68 @@
+# Source files
+src/
+script/
+types/
+
+# Build artifacts
+dist/**/*.d.ts
+dist/**/*.d.ts.map
+dist/**/*.js.map
+
+# Test files (excluded from package)
+dist/**/*.test.js
+dist/**/*.test.ts
+*.test.js
+*.test.ts
+
+# Development
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+test/
+coverage/
+.nyc_output/
+
+# Documentation (non-essential)
+IMPROVEMENTS_SUMMARY.md
+EXECUTION_REPORT.md
+LONG_RUNNING_SUPPORT.md
+LONG_RUNNING_GUIDE.md
+安装方法.md
+
+# Configuration
+.eslintrc*
+.prettierrc*
+tsconfig.json
+tsconfig.build.json
+.env*
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Misc
+*.tgz
+oh-my-novel-*.tgz
+.npm
+.opencode/
+.oh-my-novel-state/
+novels/

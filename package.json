@@ -1,0 +1,83 @@
+{
+  "name": "oh-my-novel",
+  "version": "1.0.0",
+  "description": "An OpenCode plugin for automated novel generation with AI agents",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "AGENTS.md",
+    "INSTALLATION.md",
+    "USER_GUIDE.md",
+    "QUICK_REFERENCE.md",
+    "PLUGIN_USAGE.md",
+    "QUICKSTART.md",
+    "PUBLISHING.md"
+  ],
+  "scripts": {
+    "build": "tsc --skipLibCheck",
+    "build:schema": "node script/build-schema.js",
+    "clean": "node -e \"const fs = require('fs'); fs.existsSync('dist') && fs.rmSync('dist', { recursive: true, force: true })\"",
+    "dev": "tsc --watch --skipLibCheck",
+    "test": "node -e \"console.log('Tests require Bun runtime. Install Bun from https://bun.sh')\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "novel",
+    "ai",
+    "writing",
+    "storytelling",
+    "claude",
+    "gpt",
+    "generative-ai"
+  ],
+  "author": "mxrain",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.2",
+    "jsonc-parser": "^3.3.1",
+    "picomatch": "^4.0.2",
+    "zod": "^4.1.8"
+  },
+  "bin": {
+    "oh-my-novel-installer": "./dist/cli/installer.js",
+    "oh-my-novel-doctor": "./dist/cli/doctor.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/picomatch": "^4.0.2",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mxrain/oh-my-novel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mxrain/oh-my-novel/issues"
+  },
+  "homepage": "https://github.com/mxrain/oh-my-novel#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
