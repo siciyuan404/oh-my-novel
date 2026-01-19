@@ -259,7 +259,7 @@ npx oh-my-novel install  # 备选方案
 
 ```
 按照以下说明安装和配置 oh-my-novel：
-https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/master/INSTALLATION.md
+https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
 ```
 
 ### 前置条件
