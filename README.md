@@ -249,7 +249,7 @@ Paste this into your LLM agent session:
 
 ```
 Install and configure oh-my-novel by following the instructions here:
-https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/master/INSTALLATION.md
+https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
 ```
 
 **Alternative, Not Recommended, Do This by Yourself**
