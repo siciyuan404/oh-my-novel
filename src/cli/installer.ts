@@ -16,12 +16,15 @@ const program = new Command();
 // Helper Functions
 // ============================================
 
-function log(message: string, type: "info" | "success" | "error" | "warning" = "info") {
+function log(
+  message: string,
+  type: "info" | "success" | "error" | "warning" = "info",
+) {
   const colors = {
-    info: "\x1b[36m",     // cyan
-    success: "\x1b[32m",  // green
-    error: "\x1b[31m",    // red
-    warning: "\x1b[33m"   // yellow
+    info: "\x1b[36m", // cyan
+    success: "\x1b[32m", // green
+    error: "\x1b[31m", // red
+    warning: "\x1b[33m", // yellow
   };
   const reset = "\x1b[0m";
   console.log(`${colors[type]}${message}${reset}`);
@@ -31,7 +34,7 @@ function question(prompt: string, defaultValue?: string): Promise<string> {
   return new Promise((resolve) => {
     const readline = require("readline").createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     const fullPrompt = defaultValue
@@ -49,7 +52,7 @@ function confirm(prompt: string): Promise<boolean> {
   return new Promise((resolve) => {
     const readline = require("readline").createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     readline.question(`${prompt} [y/N]: `, (answer: string) => {
@@ -82,30 +85,38 @@ async function checkOpencodeInstalled(): Promise<boolean> {
   }
 }
 
-async function checkOpencodeVersion(): Promise<{ installed: boolean; version?: string; meetsRequirement: boolean }> {
+async function checkOpencodeVersion(): Promise<{
+  installed: boolean;
+  version?: string;
+  meetsRequirement: boolean;
+}> {
   try {
     const { execSync } = await import("child_process");
-    const version = execSync("opencode --version", { encoding: "utf-8" }).trim();
+    const version = execSync("opencode --version", {
+      encoding: "utf-8",
+    }).trim();
     const installed = version >= "1.0.150";
     return {
       installed: true,
       version,
-      meetsRequirement: installed
+      meetsRequirement: installed,
     };
   } catch (error) {
     return {
       installed: false,
-      meetsRequirement: false
+      meetsRequirement: false,
     };
   }
 }
 
-async function checkDependencies(): Promise<{ name: string; installed: boolean; required: boolean }[]> {
+async function checkDependencies(): Promise<
+  { name: string; installed: boolean; required: boolean }[]
+> {
   const checks = [
     { name: "Node.js", command: "node --version", required: true },
     { name: "Bun", command: "bun --version", required: true },
     { name: "ripgrep", command: "rg --version", required: false },
-    { name: "git", command: "git --version", required: false }
+    { name: "git", command: "git --version", required: false },
   ];
 
   const results = [];
@@ -153,7 +164,7 @@ async function createOrUpdateConfig(config: any): Promise<boolean> {
     // Merge configurations
     const mergedConfig = {
       ...existingConfig,
-      ...config
+      ...config,
     };
 
     // Ensure plugins array exists
@@ -176,36 +187,44 @@ async function createOrUpdateConfig(config: any): Promise<boolean> {
   }
 }
 
-async function createNovelConfig(): Promise<boolean> {
+async function createNovelConfig(options: {
+  claude?: string;
+  chatgpt?: string;
+  gemini?: string;
+  copilot?: string;
+}): Promise<boolean> {
   const configPath = getConfigPath();
   const novelConfigFile = path.join(configPath, "oh-my-novel.jsonc");
 
   try {
+    // Determine agent models based on subscriptions
+    const agentModels = determineAgentModels(options);
+
     const defaultConfig = {
-      "$schema": "./oh-my-novel.schema.json",
+      $schema: "./oh-my-novel.schema.json",
 
       // Novel settings
-      "novelSettings": {
-        "defaultGenre": "fantasy",
-        "chapterLength": 3000,
-        "autoSave": true
+      novelSettings: {
+        defaultGenre: "fantasy",
+        chapterLength: 3000,
+        autoSave: true,
       },
 
       // Long running settings
-      "longRunning": {
-        "maxRetries": 3,
-        "retryDelay": 5000,
-        "checkpointInterval": 1,
-        "batchSize": 5,
-        "pauseOnError": true,
-        "autoResume": false
+      longRunning: {
+        maxRetries: 3,
+        retryDelay: 5000,
+        checkpointInterval: 1,
+        batchSize: 5,
+        pauseOnError: true,
+        autoResume: false,
       },
 
       // Hooks
-      "disabled_hooks": [],
+      disabled_hooks: [],
 
-      // Agent overrides (empty by default)
-      "agents": {}
+      // Agent overrides based on subscriptions
+      agents: agentModels,
     };
 
     fs.writeFileSync(novelConfigFile, JSON.stringify(defaultConfig, null, 2));
@@ -215,6 +234,75 @@ async function createNovelConfig(): Promise<boolean> {
     log(`Failed to create novel config: ${(error as Error).message}`, "error");
     return false;
   }
+}
+
+function determineAgentModels(options: {
+  claude?: string;
+  chatgpt?: string;
+  gemini?: string;
+  copilot?: string;
+}): any {
+  const hasClaude = options.claude && options.claude !== "no";
+  const hasChatGPT = options.chatgpt === "yes";
+  const hasGemini = options.gemini === "yes";
+  const hasCopilot = options.copilot === "yes";
+
+  // Default agent configurations for oh-my-novel
+  const agentModels: any = {
+    novelist: {
+      model: "anthropic/claude-opus-4-5",
+      temperature: 0.7,
+    },
+    "plot-designer": {
+      model: "openai/gpt-5.2",
+      temperature: 0.3,
+    },
+    "character-developer": {
+      model: "openai/gpt-5.2",
+      temperature: 0.4,
+    },
+    "world-builder": {
+      model: "anthropic/claude-opus-4-5",
+      temperature: 0.5,
+    },
+    editor: {
+      model: "google/gemini-3-pro-preview",
+      temperature: 0.3,
+    },
+  };
+
+  // Adjust models based on available subscriptions
+  if (hasClaude) {
+    if (options.claude === "max20") {
+      agentModels.novelist.model = "anthropic/claude-opus-4-5-max20";
+    }
+    // Claude models are already set as defaults
+  } else if (!hasClaude && !hasChatGPT && !hasGemini && !hasCopilot) {
+    // No subscriptions - use free models
+    log("No subscriptions detected. Using free models.", "warning");
+    agentModels.novelist.model = "opencode/glm-4.7-free";
+    agentModels.plotDesigner.model = "opencode/glm-4.7-free";
+    agentModels.characterDeveloper.model = "opencode/glm-4.7-free";
+    agentModels.worldBuilder.model = "opencode/glm-4.7-free";
+    agentModels.editor.model = "opencode/glm-4.7-free";
+  }
+
+  if (hasGemini) {
+    agentModels.editor.model = "google/gemini-3-pro-preview";
+  }
+
+  if (hasChatGPT) {
+    // Could use GPT models if preferred
+    agentModels.plotDesigner.model = "openai/gpt-5.2";
+    agentModels.characterDeveloper.model = "openai/gpt-5.2";
+  }
+
+  if (hasCopilot) {
+    // GitHub Copilot as fallback provider
+    log("GitHub Copilot enabled as fallback provider", "info");
+  }
+
+  return agentModels;
 }
 
 // ============================================
@@ -231,6 +319,10 @@ program
   .description("Interactive installation wizard")
   .option("--no-tui", "Run in non-interactive mode")
   .option("--skip-deps", "Skip dependency checks")
+  .option("--claude <value>", "Claude subscription status: yes, no, max20")
+  .option("--chatgpt <value>", "ChatGPT subscription status: yes, no")
+  .option("--gemini <value>", "Gemini integration: yes, no")
+  .option("--copilot <value>", "GitHub Copilot integration: yes, no")
   .action(async (options) => {
     log("🚀 Oh-My-Novel Installation Wizard", "info");
     log("=======================================", "info");
@@ -249,7 +341,10 @@ program
       }
 
       if (!opencodeCheck.meetsRequirement) {
-        log(`❌ OpenCode version ${opencodeCheck.version} is too old!`, "error");
+        log(
+          `❌ OpenCode version ${opencodeCheck.version} is too old!`,
+          "error",
+        );
         log("Please upgrade to version 1.0.150 or higher", "info");
         process.exit(1);
       }
@@ -291,7 +386,10 @@ program
       log("", "info");
 
       const genre = await question("Default novel genre", "fantasy");
-      const chapterLength = await question("Default chapter length (words)", "3000");
+      const chapterLength = await question(
+        "Default chapter length (words)",
+        "3000",
+      );
       const autoSave = await confirm("Enable auto-save?");
 
       log("", "info");
@@ -305,7 +403,7 @@ program
       });
 
       // Create oh-my-novel.jsonc
-      const novelConfigCreated = await createNovelConfig();
+      const novelConfigCreated = await createNovelConfig(options);
 
       if (novelConfigCreated) {
         log("Novel configuration created successfully!", "success");
@@ -329,7 +427,7 @@ program
       log("Running in non-interactive mode...", "info");
       await setupConfigPath();
       await createOrUpdateConfig({});
-      await createNovelConfig();
+      await createNovelConfig(options);
       log("✅ Installation complete (using defaults)!", "success");
     }
   });
@@ -352,7 +450,9 @@ program
       issues.push("OpenCode not installed");
       log("✗ OpenCode not found", "error");
     } else if (!opencodeCheck.meetsRequirement) {
-      issues.push(`OpenCode version ${opencodeCheck.version} too old (requires >= 1.0.150)`);
+      issues.push(
+        `OpenCode version ${opencodeCheck.version} too old (requires >= 1.0.150)`,
+      );
       log(`✗ OpenCode ${opencodeCheck.version} too old`, "error");
     } else {
       log(`✓ OpenCode ${opencodeCheck.version} OK`, "success");
@@ -456,13 +556,16 @@ program
           }
         }
       } catch (error) {
-        log(`Failed to update opencode.json: ${(error as Error).message}`, "error");
+        log(
+          `Failed to update opencode.json: ${(error as Error).message}`,
+          "error",
+        );
       }
     }
 
     // Remove novel config
     if (fs.existsSync(novelConfigFile)) {
-      if (options.purge || await confirm("Remove oh-my-novel.jsonc?")) {
+      if (options.purge || (await confirm("Remove oh-my-novel.jsonc?"))) {
         fs.unlinkSync(novelConfigFile);
         log(`Removed ${novelConfigFile}`, "success");
       }

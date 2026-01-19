@@ -1,7 +1,7 @@
-import { Hook } from "opencode";
+import { Hook } from "./opencode";
 import * as fs from "fs";
 import * as path from "path";
-import { configManager } from "../config/manager.js";
+import { configManager } from "./config-manager.js";
 
 // Enhanced hooks
 export {

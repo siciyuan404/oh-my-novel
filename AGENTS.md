@@ -18,13 +18,13 @@ Oh-My-Novel is an OpenCode plugin that transforms the platform into an AI-powere
 
 ### Specialized Agents (5 agents)
 
-| Agent | Model | Permissions | Purpose |
-|--------|--------|-------------|---------|
-| **Novelist** | anthropic/claude-opus-4-5 | read, write, run | Main orchestrator. Manages chapter progression, narrative consistency, coordinates other agents |
-| **Plot Designer** | openai/gpt-5.2 | read | Creates compelling story arcs, plot twists, narrative structures |
-| **Character Developer** | openai/gpt-5.2 | read | Builds rich, multi-dimensional characters with backstories and motivations |
-| **World Builder** | anthropic/claude-opus-4-5 | read | Constructs immersive settings, magic systems, world lore |
-| **Editor** | google/gemini-3-pro-preview | read, write | Refines prose, checks for consistency, polishes manuscript |
+| Agent                   | Model                       | Permissions      | Purpose                                                                                         |
+| ----------------------- | --------------------------- | ---------------- | ----------------------------------------------------------------------------------------------- |
+| **Novelist**            | anthropic/claude-opus-4-5   | read, write, run | Main orchestrator. Manages chapter progression, narrative consistency, coordinates other agents |
+| **Plot Designer**       | openai/gpt-5.2              | read             | Creates compelling story arcs, plot twists, narrative structures                                |
+| **Character Developer** | openai/gpt-5.2              | read             | Builds rich, multi-dimensional characters with backstories and motivations                      |
+| **World Builder**       | anthropic/claude-opus-4-5   | read             | Constructs immersive settings, magic systems, world lore                                        |
+| **Editor**              | google/gemini-3-pro-preview | read, write      | Refines prose, checks for consistency, polishes manuscript                                      |
 
 ### Agent Collaboration Model
 
@@ -43,6 +43,7 @@ Three-tier permission system: `ask` / `allow` / `deny`
 - **File operation permissions**: Control read/write/edit operations
 
 **Permission Presets**:
+
 - `readOnly`: Plot Designer, Character Developer (can't write files)
 - `readWrite`: Novelist, Editor (can read and write)
 - `exploration`: World Builder (can explore and read)
@@ -54,72 +55,72 @@ Three-tier permission system: `ask` / `allow` / `deny`
 
 ### Novel Management Tools (6 tools)
 
-| Tool | Description |
-|------|-------------|
-| `novel_create` | Initialize a new novel project with directory structure |
-| `chapter_write` | Write individual chapters with word count tracking |
-| `character_manage` | CRUD operations for character profiles |
-| `plot_outline` | Create/view/update plot outlines |
-| `world_notes` | Document world-building details by category |
-| `export_novel` | Export complete novel to markdown/txt |
+| Tool               | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `novel_create`     | Initialize a new novel project with directory structure |
+| `chapter_write`    | Write individual chapters with word count tracking      |
+| `character_manage` | CRUD operations for character profiles                  |
+| `plot_outline`     | Create/view/update plot outlines                        |
+| `world_notes`      | Document world-building details by category             |
+| `export_novel`     | Export complete novel to markdown/txt                   |
 
 ### Long-Running Tools (7 tools)
 
-| Tool | Description |
-|------|-------------|
+| Tool                            | Description                                              |
+| ------------------------------- | -------------------------------------------------------- |
 | `start_long_running_generation` | Start unlimited chapter generation with batch processing |
-| `check_generation_progress` | Monitor real-time progress and status |
-| `pause_generation` | Gracefully pause running tasks |
-| `resume_generation` | Resume from checkpoints |
-| `list_all_generations` | List all active/saved tasks |
-| `delete_generation_state` | Clean up and stop tasks |
-| `export_generation_state` | Export state for backup |
+| `check_generation_progress`     | Monitor real-time progress and status                    |
+| `pause_generation`              | Gracefully pause running tasks                           |
+| `resume_generation`             | Resume from checkpoints                                  |
+| `list_all_generations`          | List all active/saved tasks                              |
+| `delete_generation_state`       | Clean up and stop tasks                                  |
+| `export_generation_state`       | Export state for backup                                  |
 
 ### Search Tools (3 tools)
 
-| Tool | Description | Limits |
-|------|-------------|--------|
-| `grep` | Search for patterns using ripgrep | 60s timeout, 10MB output |
-| `glob` | Find files matching patterns | 60s timeout, 100 files |
-| `search_novel` | Search within novel content (chapters, characters, plot, world) | Scoped search |
+| Tool           | Description                                                     | Limits                   |
+| -------------- | --------------------------------------------------------------- | ------------------------ |
+| `grep`         | Search for patterns using ripgrep                               | 60s timeout, 10MB output |
+| `glob`         | Find files matching patterns                                    | 60s timeout, 100 files   |
+| `search_novel` | Search within novel content (chapters, characters, plot, world) | Scoped search            |
 
 ### Session Management Tools (4 tools)
 
-| Tool | Description |
-|------|-------------|
-| `session_list` | List all sessions with filtering by date and limit |
-| `session_read` | Read messages and history from a specific session |
-| `session_search` | Full-text search across session messages |
-| `session_info` | Get metadata and statistics about a session |
+| Tool             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `session_list`   | List all sessions with filtering by date and limit |
+| `session_read`   | Read messages and history from a specific session  |
+| `session_search` | Full-text search across session messages           |
+| `session_info`   | Get metadata and statistics about a session        |
 
 ### Category Tools (3 tools)
 
-| Tool | Description |
-|------|-------------|
-| `list_categories` | List all available task categories with descriptions |
-| `apply_category` | Apply category configuration to agent invocation |
-| `recommend_category` | Analyze task and recommend appropriate category |
+| Tool                 | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| `list_categories`    | List all available task categories with descriptions |
+| `apply_category`     | Apply category configuration to agent invocation     |
+| `recommend_category` | Analyze task and recommend appropriate category      |
 
 ### Background Task Tools (7 tools)
 
-| Tool | Description |
-|------|-------------|
-| `create_task` | Create a new background task |
-| `start_task` | Start a pending background task |
-| `pause_task` | Pause a running background task |
-| `resume_task` | Resume a paused background task |
-| `cancel_task` | Cancel a background task |
-| `list_tasks` | List all background tasks with filtering |
-| `get_task_status` | Get detailed status of a specific task |
-| `cleanup_tasks` | Clean up old completed/failed/cancelled tasks |
+| Tool              | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `create_task`     | Create a new background task                  |
+| `start_task`      | Start a pending background task               |
+| `pause_task`      | Pause a running background task               |
+| `resume_task`     | Resume a paused background task               |
+| `cancel_task`     | Cancel a background task                      |
+| `list_tasks`      | List all background tasks with filtering      |
+| `get_task_status` | Get detailed status of a specific task        |
+| `cleanup_tasks`   | Clean up old completed/failed/cancelled tasks |
 
 ### Skill Loader Tools (4 tools)
 
-| Tool | Description |
-|------|-------------|
-| `load_skill` | Load a custom skill by name |
-| `list_skills` | List all available custom skills |
-| `reload_skills` | Reload all skills from directories |
+| Tool                    | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `load_skill`            | Load a custom skill by name                      |
+| `list_skills`           | List all available custom skills                 |
+| `reload_skills`         | Reload all skills from directories               |
 | `create_skill_template` | Generate a skill template for users to customize |
 
 ---
@@ -128,29 +129,30 @@ Three-tier permission system: `ask` / `allow` / `deny`
 
 ### Core Hooks (3 hooks)
 
-| Hook | Description |
-|------|-------------|
-| `preToolUse` | Auto-save drafts before operations |
-| `postToolUse` | Update chapter indexes and track progress |
+| Hook               | Description                                |
+| ------------------ | ------------------------------------------ |
+| `preToolUse`       | Auto-save drafts before operations         |
+| `postToolUse`      | Update chapter indexes and track progress  |
 | `userPromptSubmit` | Inject novel context into AI conversations |
 
 ### Enhanced Hooks (7 hooks)
 
-| Hook | Description | Triggers |
-|------|-------------|----------|
-| `session-recovery` | Automatically recover from session errors (missing tool results, empty messages, thinking block issues) | event, tool.execute.before |
-| `context-window-monitor` | Monitor token usage and alert at 70%/90% thresholds | chat.message |
-| `todo-continuation-enforcer` | Force agents to complete all TODOs before stopping | chat.message |
-| `keyword-detector` | Detect keywords and activate specialized modes (long-run, edit, plot, character, world, generate) | userPromptSubmit |
-| `comment-checker` | Prevent AI from adding excessive comments (>15% ratio) | tool.execute.after |
-| `empty-task-response-detector` | Catch when Task tool returns nothing | tool.execute.after |
-| `background-notification` | Notify when background agent tasks complete | event |
-| `longRunningMonitor` | Monitor long-running tasks and auto-save checkpoints | event |
-| `errorRecovery` | Log errors and identify recovery points from backups | event |
+| Hook                           | Description                                                                                             | Triggers                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `session-recovery`             | Automatically recover from session errors (missing tool results, empty messages, thinking block issues) | event, tool.execute.before |
+| `context-window-monitor`       | Monitor token usage and alert at 70%/90% thresholds                                                     | chat.message               |
+| `todo-continuation-enforcer`   | Force agents to complete all TODOs before stopping                                                      | chat.message               |
+| `keyword-detector`             | Detect keywords and activate specialized modes (long-run, edit, plot, character, world, generate)       | userPromptSubmit           |
+| `comment-checker`              | Prevent AI from adding excessive comments (>15% ratio)                                                  | tool.execute.after         |
+| `empty-task-response-detector` | Catch when Task tool returns nothing                                                                    | tool.execute.after         |
+| `background-notification`      | Notify when background agent tasks complete                                                             | event                      |
+| `longRunningMonitor`           | Monitor long-running tasks and auto-save checkpoints                                                    | event                      |
+| `errorRecovery`                | Log errors and identify recovery points from backups                                                    | event                      |
 
 ### Long-Running Hooks (2 hooks)
 
 These hooks are defined in `src/hooks/long-running-hooks.ts` and handle:
+
 - Monitoring long-running generation tasks
 - Error recovery during generation
 
@@ -161,12 +163,14 @@ These hooks are defined in `src/hooks/long-running-hooks.ts` and handle:
 ### Configuration Schema (Zod validation, 344 lines)
 
 **Multi-level configuration**:
+
 1. `.opencode/oh-my-novel.jsonc` (project-level, highest priority)
 2. `.opencode/oh-my-novel.json` (project-level)
 3. `~/.config/opencode/oh-my-novel.jsonc` (user-level)
 4. `~/.config/opencode/oh-my-novel.json` (user-level)
 
 **Configuration sections**:
+
 - `agents`: Override agent configurations (model, temperature, permissions, prompt_append)
 - `categories`: Custom task categories with model and settings presets
 - `novelSettings`: Novel defaults (defaultGenre, chapterLength, autoSave)
@@ -181,6 +185,7 @@ These hooks are defined in `src/hooks/long-running-hooks.ts` and handle:
 ### JSONC Support
 
 Configuration files support JSONC (JSON with comments and trailing commas):
+
 ```jsonc
 {
   "$schema": "./oh-my-novel.schema.json",
@@ -188,30 +193,31 @@ Configuration files support JSONC (JSON with comments and trailing commas):
   "novelSettings": {
     "defaultGenre": "fantasy",
     "chapterLength": 3000,
-    "autoSave": true
+    "autoSave": true,
   },
   // Agent overrides
   "agents": {
     "novelist": {
       "model": "anthropic/claude-opus-4-5",
-      "temperature": 0.7
+      "temperature": 0.7,
     },
     "plot-designer": {
       "permission": {
         "edit": "ask",
         "bash": {
           "git": "allow",
-          "rm": "deny"
-        }
-      }
-    }
-  }
+          "rm": "deny",
+        },
+      },
+    },
+  },
 }
 ```
 
 ### Configuration Manager
 
 `src/config/manager.ts` provides:
+
 - Multi-level configuration loading with priority
 - JSONC parsing support
 - Runtime validation with Zod
@@ -224,16 +230,16 @@ Configuration files support JSONC (JSON with comments and trailing commas):
 
 ### Default Categories (8 categories)
 
-| Category | Model | Temperature | Purpose |
-|----------|-------|-------------|---------|
-| `plotting` | openai/gpt-5.2 | 0.3 | Story structure, narrative arcs, plot development |
-| `character-development` | openai/gpt-5.2 | 0.4 | Creating rich characters with depth and growth |
-| `world-building` | anthropic/claude-opus-4-5 | 0.5 | Constructing immersive settings and world lore |
-| `writing` | anthropic/claude-opus-4-5 | 0.7 | Generating engaging prose and chapter content |
-| `editing` | google/gemini-3-pro-preview | 0.3 | Refining prose and ensuring quality |
-| `research` | opencode/glm-4.7-free | 0.2 | Searching and analyzing existing novel content |
-| `long-running` | anthropic/claude-opus-4-5 | 0.6 | Extended chapter generation with consistency |
-| `planning` | openai/gpt-5.2 | 0.1 | Strategic planning and analysis |
+| Category                | Model                       | Temperature | Purpose                                           |
+| ----------------------- | --------------------------- | ----------- | ------------------------------------------------- |
+| `plotting`              | openai/gpt-5.2              | 0.3         | Story structure, narrative arcs, plot development |
+| `character-development` | openai/gpt-5.2              | 0.4         | Creating rich characters with depth and growth    |
+| `world-building`        | anthropic/claude-opus-4-5   | 0.5         | Constructing immersive settings and world lore    |
+| `writing`               | anthropic/claude-opus-4-5   | 0.7         | Generating engaging prose and chapter content     |
+| `editing`               | google/gemini-3-pro-preview | 0.3         | Refining prose and ensuring quality               |
+| `research`              | opencode/glm-4.7-free       | 0.2         | Searching and analyzing existing novel content    |
+| `long-running`          | anthropic/claude-opus-4-5   | 0.6         | Extended chapter generation with consistency      |
+| `planning`              | openai/gpt-5.2              | 0.1         | Strategic planning and analysis                   |
 
 ### Category-Based Delegation
 
@@ -243,8 +249,8 @@ Use `apply_category` tool to automatically apply category settings to agents:
 apply_category({
   category: "plotting",
   agent: "novelist",
-  validate: true
-})
+  validate: true,
+});
 ```
 
 This applies the category's model, temperature, tools, and prompt_append to the agent.
@@ -265,12 +271,14 @@ This applies the category's model, temperature, tools, and prompt_append to the 
 ### Custom Skills
 
 Custom skills can be loaded from:
+
 - `~/.claude/skills/` (user-level)
 - `./.claude/skills/` (project-level)
 - `~/.config/opencode/skills/` (opencode user-level)
 - `./.opencode/skills/` (opencode project-level)
 
 **Skill format**:
+
 ```markdown
 ---
 name: custom-character-generator
@@ -290,6 +298,7 @@ Generate detailed character profiles with backstories, motivations, and flaws.
 ## Instructions
 
 Use this skill to create rich, multi-dimensional characters:
+
 - Define clear goals and motivations
 - Create internal and external conflicts
 - Design visible flaws and weaknesses
@@ -313,6 +322,7 @@ custom-character-generator: "Create a young wizard protagonist with a hidden pow
 ### State Management
 
 Persistent state storage in `./.oh-my-novel-state/`:
+
 - `novelTitle`: Novel identifier
 - `currentChapter`: Current chapter being generated
 - `totalChapters`: Total chapters to generate
@@ -363,6 +373,7 @@ Persistent state storage in `./.oh-my-novel-state/`:
 ### Test Coverage
 
 **Test files** (3 files):
+
 - `src/tools/index.test.ts`: 6 test suites (novel_create, chapter_write, character_manage, plot_outline, world_notes, export_novel)
 - `src/hooks/index.test.ts`: 3 test suites (preToolUse, postToolUse, userPromptSubmit)
 - `src/utils/utils.test.ts`: 2 test suites (StateManager, LongRunningGenerator)
@@ -467,6 +478,7 @@ node dist/cli/doctor.js
 ```
 
 **State Object**:
+
 ```typescript
 {
   novelTitle: string;
@@ -538,16 +550,17 @@ oh-my-novel/
 
 The keyword detector automatically activates specialized modes when keywords are detected in user prompts:
 
-| Mode | Keywords | Behavior |
-|------|----------|----------|
-| `long-run` / `lgr` | long-run, longrunning, unlimited, batch | Activate long-running mode with batch processing and auto-retry |
-| `edit` / `revise` / `rewrite` / `modify` | edit, revise, rewrite, modify | Activate editing mode with Editor agent |
-| `plot` / `outline` / `storyline` / `structure` | plot, outline, storyline, structure, narrative | Activate plotting mode |
-| `character` / `char` / `protagonist` / `villain` | character, char, protagonist, villain, person, role | Activate character development mode |
-| `world` / `setting` / `environment` / `lore` / `geography` | world, setting, environment, lore, geography, magic, system | Activate world-building mode |
-| `generate` / `write` / `create` / `draft` | generate, write, create, draft | Activate writing mode |
+| Mode                                                       | Keywords                                                    | Behavior                                                        |
+| ---------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |
+| `long-run` / `lgr`                                         | long-run, longrunning, unlimited, batch                     | Activate long-running mode with batch processing and auto-retry |
+| `edit` / `revise` / `rewrite` / `modify`                   | edit, revise, rewrite, modify                               | Activate editing mode with Editor agent                         |
+| `plot` / `outline` / `storyline` / `structure`             | plot, outline, storyline, structure, narrative              | Activate plotting mode                                          |
+| `character` / `char` / `protagonist` / `villain`           | character, char, protagonist, villain, person, role         | Activate character development mode                             |
+| `world` / `setting` / `environment` / `lore` / `geography` | world, setting, environment, lore, geography, magic, system | Activate world-building mode                                    |
+| `generate` / `write` / `create` / `draft`                  | generate, write, create, draft                              | Activate writing mode                                           |
 
 **Usage**:
+
 ```
 User: "Start long-run generation for Dragon Pact novel"
 → Mode: long-run activated
@@ -569,6 +582,7 @@ User: "Edit chapter 5 to improve the dialogue"
 ### Permission Types
 
 1. **Tool permissions**: Control access to specific tools
+
    ```typescript
    permission: {
      "novel_create": "deny",
@@ -578,6 +592,7 @@ User: "Edit chapter 5 to improve the dialogue"
    ```
 
 2. **Bash permissions**: Control shell command execution
+
    ```typescript
    permission: {
      bash: {
@@ -657,18 +672,18 @@ oh-my-novel/
 
 ## STATISTICS
 
-| Metric | Count |
-|--------|--------|
-| **Total files** | 28+ |
-| **Source files** | 20+ |
-| **Test files** | 3 |
-| **Tools** | 20+ |
-| **Hooks** | 12 |
-| **Agents** | 5 |
-| **Skills** | 2 built-in + custom |
-| **Configuration schema** | 344 lines |
-| **Code coverage** | ~60% |
-| **Dependencies** | 5 (opencode, zod, jsonc-parser, picomatch, commander) |
+| Metric                   | Count                                                 |
+| ------------------------ | ----------------------------------------------------- |
+| **Total files**          | 28+                                                   |
+| **Source files**         | 20+                                                   |
+| **Test files**           | 3                                                     |
+| **Tools**                | 20+                                                   |
+| **Hooks**                | 12                                                    |
+| **Agents**               | 5                                                     |
+| **Skills**               | 2 built-in + custom                                   |
+| **Configuration schema** | 344 lines                                             |
+| **Code coverage**        | ~60%                                                  |
+| **Dependencies**         | 5 (opencode, zod, jsonc-parser, picomatch, commander) |
 
 ---
 
@@ -726,10 +741,10 @@ User: Search for "magic sword" in the novel
 
 ## CONTACT & SUPPORT
 
-- **GitHub**: https://github.com/yourusername/oh-my-novel
-- **Issues**: https://github.com/yourusername/oh-my-novel/issues
-- **Discussions**: https://github.com/yourusername/oh-my-novel/discussions
-- **Inspired by**: oh-my-opencode (https://github.com/code-yeongyu/oh-my-opencode)
+- **GitHub**: https://github.com/siciyuan404/oh-my-novel
+- **Issues**: https://github.com/siciyuan404/oh-my-novel/issues
+- **Discussions**: https://github.com/siciyuan404/oh-my-novel/discussions
+- **Inspired by**: [oh-my-opencode](https://github.com/siciyuan404/oh-my-opencode)
 
 ---
 
