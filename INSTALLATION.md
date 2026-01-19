@@ -21,13 +21,13 @@ Before installing oh-my-novel, ensure you have the following:
 
 ### Required Tools
 
-| Tool | Minimum Version | Installation | Check Command |
-|------|----------------|--------------|---------------|
-| **Bun** | Latest | https://bun.sh | `bun --version` |
-| **OpenCode** | 1.0.150+ | https://github.com/sst/opencode | `opencode --version` |
-| **Node.js** | 18+ | https://nodejs.org | `node --version` |
-| **Git** | Any | https://git-scm.com | `git --version` |
-| **ripgrep** | Any | https://github.com/BurntSushi/ripgrep | `rg --version` |
+| Tool         | Minimum Version | Installation                          | Check Command        |
+| ------------ | --------------- | ------------------------------------- | -------------------- |
+| **Bun**      | Latest          | https://bun.sh                        | `bun --version`      |
+| **OpenCode** | 1.0.150+        | https://github.com/sst/opencode       | `opencode --version` |
+| **Node.js**  | 18+             | https://nodejs.org                    | `node --version`     |
+| **Git**      | Any             | https://git-scm.com                   | `git --version`      |
+| **ripgrep**  | Any             | https://github.com/BurntSushi/ripgrep | `rg --version`       |
 
 ### Installation Commands
 
@@ -65,11 +65,11 @@ There are three ways to install oh-my-novel:
 **Best for:** Users who want to use oh-my-novel in multiple projects.
 
 ```bash
-# Install globally
+# Install globally (for CLI tools)
 bun install -g oh-my-novel
 
-# Or install from GitHub
-bunx oh-my-novel@latest install
+# Or run via bunx if package is published
+bunx oh-my-novel install
 ```
 
 ### Method 2: Local Installation
@@ -77,18 +77,27 @@ bunx oh-my-novel@latest install
 **Best for:** Project-specific usage or development.
 
 ```bash
-# Clone the repository
-git clone https://github.com/mxrain/oh-my-novel.git
+# Clone repository
+git clone https://github.com/siciyuan404/oh-my-novel.git
 cd oh-my-novel
 
 # Install dependencies
 bun install
 
-# Build the plugin
+# Build plugin
 bun run build
 
-# Run the interactive installer
+# Run interactive installer
 bunx oh-my-novel install
+```
+
+### Method 3: Local Development
+
+**Best for:** Development and testing with latest changes.
+
+```bash
+# Run installer directly from local build
+node dist/cli/installer.js
 ```
 
 ### Method 3: Direct from GitHub (No Clone)
@@ -115,6 +124,7 @@ bunx oh-my-novel install
 #### Step 1: Dependency Check
 
 The wizard automatically checks:
+
 - OpenCode installation
 - OpenCode version (must be >= 1.0.150)
 - Bun runtime
@@ -160,9 +170,7 @@ The wizard adds the plugin to OpenCode configuration:
 
 ```json
 {
-  "plugin": [
-    "oh-my-novel"
-  ]
+  "plugin": ["oh-my-novel"]
 }
 ```
 
@@ -197,7 +205,7 @@ Create `.opencode/oh-my-novel.jsonc` in your project directory:
   "novelSettings": {
     "defaultGenre": "fantasy",
     "chapterLength": 3000,
-    "autoSave": true
+    "autoSave": true,
   },
   // Agent overrides
   "agents": {
@@ -208,39 +216,39 @@ Create `.opencode/oh-my-novel.jsonc` in your project directory:
         "edit": "ask",
         "bash": {
           "git": "allow",
-          "rm": "deny"
-        }
-      }
+          "rm": "deny",
+        },
+      },
     },
     "plot-designer": {
       "model": "openai/gpt-5.2",
-      "temperature": 0.3
+      "temperature": 0.3,
     },
     "character-developer": {
       "model": "openai/gpt-5.2",
-      "temperature": 0.4
+      "temperature": 0.4,
     },
     "world-builder": {
       "model": "anthropic/claude-opus-4-5",
-      "temperature": 0.5
+      "temperature": 0.5,
     },
     "editor": {
       "model": "google/gemini-3-pro-preview",
-      "temperature": 0.3
-    }
+      "temperature": 0.3,
+    },
   },
   // Long running settings
   "longRunning": {
     "maxRetries": 5,
     "retryDelay": 5000,
     "batchSize": 10,
-    "checkpointInterval": 1
+    "checkpointInterval": 1,
   },
   // Background task settings
   "background_task": {
     "concurrency": 3,
-    "timeout": 300000
-  }
+    "timeout": 300000,
+  },
 }
 ```
 
@@ -250,9 +258,7 @@ Add the plugin to `~/.config/opencode/opencode.json`:
 
 ```json
 {
-  "plugin": [
-    "oh-my-novel"
-  ],
+  "plugin": ["oh-my-novel"],
   "model": "anthropic/claude-opus-4-5",
   "temperature": 0.7
 }
@@ -333,6 +339,7 @@ opencode
 ```
 
 Expected response:
+
 ```
 Novelist: Creating a fantasy novel about dragons...
 - Plot Designer: Creating story outline...
@@ -349,9 +356,10 @@ Novelist: Creating a fantasy novel about dragons...
 **Error:** `OpenCode version 1.0.100 is lower than required 1.0.150`
 
 **Solution:**
+
 ```bash
-# Update OpenCode
-bun install -g opencode@latest
+# Install OpenCode globally
+bun install -g opencode
 ```
 
 ### Issue: ripgrep not found
@@ -361,6 +369,7 @@ bun install -g opencode@latest
 **Solution:**
 
 **Windows:**
+
 ```bash
 # Using Chocolatey
 choco install ripgrep
@@ -370,11 +379,13 @@ choco install ripgrep
 ```
 
 **macOS:**
+
 ```bash
 brew install ripgrep
 ```
 
 **Linux:**
+
 ```bash
 # Ubuntu/Debian
 sudo apt install ripgrep
@@ -391,6 +402,7 @@ sudo pacman -S ripgrep
 **Error:** `Permission denied: ./novels/`
 
 **Solution:**
+
 ```bash
 # Manually create directories with proper permissions
 mkdir -p novels .oh-my-novel-state
@@ -428,16 +440,16 @@ EOF
 **Solution:**
 
 1. Check OpenCode configuration:
+
    ```bash
    cat ~/.config/opencode/opencode.json
    ```
 
 2. Ensure the plugin is listed:
+
    ```json
    {
-     "plugin": [
-       "oh-my-novel"
-     ]
+     "plugin": ["oh-my-novel"]
    }
    ```
 
@@ -472,6 +484,7 @@ bun run build
 **Solution:**
 
 1. Check agent configuration:
+
    ```bash
    cat .opencode/oh-my-novel.jsonc | grep -A 5 "novelist"
    ```
@@ -483,7 +496,7 @@ bun run build
 
 If you're still experiencing issues:
 
-1. Check the [GitHub Issues](https://github.com/mxrain/oh-my-novel/issues)
+1. Check the [GitHub Issues](https://github.com/siciyuan404/oh-my-novel/issues)
 2. Search for similar problems
 3. Open a new issue with:
    - Error message
@@ -500,9 +513,6 @@ If you're still experiencing issues:
 ```bash
 # Uninstall globally
 bun uninstall -g oh-my-novel
-
-# Or remove from local directory
-rm -rf oh-my-novel
 ```
 
 ### Remove Configuration Files
@@ -552,9 +562,9 @@ After successful installation:
 
 ## Support
 
-- **GitHub Repository:** https://github.com/mxrain/oh-my-novel
-- **Issues:** https://github.com/mxrain/oh-my-novel/issues
-- **Discussions:** https://github.com/mxrain/oh-my-novel/discussions
+- **GitHub Repository:** https://github.com/siciyuan404/oh-my-novel
+- **Issues:** https://github.com/siciyuan404/oh-my-novel/issues
+- **Discussions:** https://github.com/siciyuan404/oh-my-novel/discussions
 - **Documentation:** [README.md](./README.md)
 
 ---

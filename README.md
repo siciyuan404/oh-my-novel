@@ -3,7 +3,7 @@
 An OpenCode plugin for automated novel generation with AI agents. This plugin transforms OpenCode into a powerful writing assistant that can help you create, organize, and refine novels using specialized AI agents.
 
 **Version**: 1.0.0
-**Inspired by**: [oh-my-opencode](https://github.com/code-yeongyu/oh-my-opencode)
+**Inspired by**: [oh-my-opencode](https://github.com/siciyuan404/oh-my-opencode)
 
 ---
 
@@ -243,6 +243,34 @@ Configuration files support JSONC (JSON with comments and trailing commas):
 
 ## 🚀 Installation
 
+### For Humans
+
+Paste this into your LLM agent session:
+
+```
+Install and configure oh-my-novel by following the instructions here:
+https://raw.githubusercontent.com/mxrain/oh-my-novel/refs/heads/master/INSTALLATION.md
+```
+
+**Alternative, Not Recommended, Do This by Yourself**
+
+Run interactive installer:
+
+```bash
+bunx oh-my-novel install  # recommended
+npx oh-my-novel install  # alternative
+```
+
+> **Note**: The CLI ships with standalone binaries for all major platforms. No runtime (Bun/Node.js) is required for CLI execution after installation.
+
+### For LLM Agents
+
+Fetch installation guide and follow it:
+
+```bash
+curl -s https://raw.githubusercontent.com/mxrain/oh-my-novel/refs/heads/master/INSTALLATION.md
+```
+
 ### Prerequisites
 
 - [Bun](https://bun.sh/) runtime (optional, for full CLI features)
@@ -252,57 +280,64 @@ Configuration files support JSONC (JSON with comments and trailing commas):
 
 ### Quick Start
 
-#### Step 1: Install OpenCode
+#### Step 1: Install OpenCode (if not installed)
 
 ```bash
-# Using Bun (recommended)
-bun install -g opencode
-
-# Using npm
-npm install -g opencode
+if command -v opencode &> /dev/null; then
+    echo "OpenCode $(opencode --version) is installed"
+else
+    echo "OpenCode is not installed. Please install it first."
+    echo "Ref: https://opencode.ai/docs"
+fi
 ```
 
-#### Step 2: Install oh-my-novel Plugin
+If OpenCode isn't installed, check [OpenCode Installation Guide](https://opencode.ai/docs).
+
+#### Step 2: Run Interactive Installer
 
 ```bash
-# From npm (recommended for npm users)
-npm install -g oh-my-novel
-
-# Using bunx
+# Interactive mode with prompts
 bunx oh-my-novel install
 
-# From GitHub
-git clone https://github.com/mxrain/oh-my-novel.git
-cd oh-my-novel
-npm install
-npm run build
+# Non-interactive mode with subscription flags
+bunx oh-my-novel install --no-tui \
+  --claude=<yes|no|max20> \
+  --chatgpt=<yes|no> \
+  --gemini=<yes|no> \
+  --copilot=<yes|no>
 ```
 
-#### Step 3: Configure OpenCode
+**Examples:**
 
-Create or edit your OpenCode configuration file:
+- User has Claude (max20): `bunx oh-my-novel install --no-tui --claude=max20 --chatgpt=no --gemini=no --copilot=no`
+- User has only Claude: `bunx oh-my-novel install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
+- User has all subscriptions: `bunx oh-my-novel install --no-tui --claude=yes --chatgpt=yes --gemini=yes --copilot=no`
+- User has no subscriptions: `bunx oh-my-novel install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
 
-**Windows**: `C:\Users\{username}\.config\opencode\opencode.json`
-**macOS/Linux**: `~/.config/opencode/opencode.json`
+The installer will:
 
-Add the plugin:
+- Check OpenCode installation and version
+- Configure agent models based on your subscriptions
+- Register plugin in `~/.config/opencode/opencode.json`
+- Create `~/.config/opencode/oh-my-novel.jsonc` with your configuration
 
-```json
-{
-  "plugin": ["oh-my-novel"],
-  "model": "anthropic/claude-opus-4-5",
-  "temperature": 0.7
-}
-```
-
-#### Step 4: Verify Installation
+#### Step 3: Verify Installation
 
 ```bash
-# Start OpenCode
-opencode
+opencode --version  # Should be 1.0.150 or higher
+cat ~/.config/opencode/opencode.json  # Should contain "oh-my-novel" in plugin array
+```
 
-# Check plugin loaded
-# You should see: [INFO] Loaded plugins: oh-my-novel
+#### Step 4: Configure Authentication
+
+Configure your AI providers as instructed:
+
+```bash
+opencode auth login
+# Interactive Terminal: find Provider: Select your provider
+# Follow the OAuth flow in your browser
+# Wait for completion
+# Verify success
 ```
 
 For detailed installation instructions, see [PLUGIN_USAGE.md](./PLUGIN_USAGE.md) or [INSTALLATION.md](./INSTALLATION.md).
@@ -318,15 +353,37 @@ For detailed installation instructions, including:
 
 📖 **See [INSTALLATION.md](./INSTALLATION.md)**
 
-### Configure OpenCode
+### Uninstallation
 
-Add `oh-my-novel` to your `~/.config/opencode/opencode.json`:
+To remove oh-my-novel:
 
-```json
-{
-  "plugin": ["oh-my-novel"]
-}
-```
+1. **Remove plugin from your OpenCode config**
+
+   Edit `~/.config/opencode/opencode.json` (or `opencode.jsonc`) and remove `"oh-my-novel"` from `plugin` array:
+
+   ```bash
+   # Using jq
+   jq '.plugin = [.plugin[] | select(. != "oh-my-novel")]' \
+       ~/.config/opencode/opencode.json > /tmp/oc.json && \
+       mv /tmp/oc.json ~/.config/opencode/opencode.json
+   ```
+
+2. **Remove configuration files (optional)**
+
+   ```bash
+   # Remove user config
+   rm -f ~/.config/opencode/oh-my-novel.json
+
+   # Remove project config (if exists)
+   rm -f .opencode/oh-my-novel.json
+   ```
+
+3. **Verify removal**
+
+   ```bash
+   opencode --version
+   # Plugin should no longer be loaded
+   ```
 
 ---
 
