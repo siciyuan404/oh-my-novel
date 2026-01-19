@@ -246,32 +246,51 @@ oh-my-novel 现在完全支持具有无限章节的长运行小说生成任务�
 
 ```bash
 bunx oh-my-novel install  # 推荐
-npx oh-my-novel install  # 备选方案
+npx oh-my-novel install  # npm 安装方式（等发布后）
 ```
 
 > **注意**：CLI 附带所有主要平台的独立二进制文件。安装后无需运行时（Bun/Node.js）来执行 CLI。
 
-请按照提示配置你的 Claude、ChatGPT 和 Gemini 订阅。安装完成后，按照说明配置你的提供商。
+请按照提示配置你的 AI 提供商认证信息。安装完成后，在 OpenCode 中使用 `opencode auth login` 配置。
 
-**备选方案：让 LLM 代理执行**
+**推荐的安装方式**：
 
-将以下内容粘贴到 LLM 代理会话：
+1. **本地开发安装**（当前推荐）
 
-```
-按照以下说明安装和配置 oh-my-novel：
-https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
-```
+   ```bash
+   git clone https://github.com/siciyuan404/oh-my-novel.git
+   cd oh-my-novel
+   bun install
+   bun run build
+   node dist/cli/installer.js
+   ```
 
-### 前置条件
+2. **全局安装**（等发布到 npm 后）
 
-- [Bun](https://bun.sh/) 运行时（可选，用于完整 CLI 功能）
-- [OpenCode](https://github.com/sst/opencode) CLI（版本 1.0.150 或更高）
-- [Node.js](https://nodejs.org) 18+（用于 npm 用户）
-- [Git](https://git-scm.com)（用于版本控制）
+   ```bash
+   bun install -g oh-my-novel  # 等包发布后使用
+   ```
 
-### 快速开始
+3. **使用 npm 安装**（等发布到 npm 后）
+   ```bash
+   npm install -g oh-my-novel  # 等包发布后使用
+   ```
 
-#### 步骤 1：安装 OpenCode（如果未安装）
+> **注意**：目前 `oh-my-novel` 包**尚未发布到 npm**。请使用以下本地开发安装方式：
+>
+> ```bash
+> git clone https://github.com/siciyuan404/oh-my-novel.git
+> cd oh-my-novel
+> bun install
+> bun run build
+> node dist/cli/installer.js
+> ```
+>
+> **不推荐**：不要让 LLM 代理执行安装命令，因为安装器需要手动配置。
+>
+> **注意**：安装器需要手动配置 AI 提供商，无法通过 LLM 自动完成。请在 OpenCode 配置完成后使用 `opencode auth login` 配置认证。
+
+---
 
 ```bash
 if command -v opencode &> /dev/null; then
