@@ -236,6 +236,15 @@ oh-my-novel 现在完全支持具有无限章节的长运行小说生成任务�
 **ralph_loop**：Ralph 循环配置
 **notification**：通知设置
 
+### For LLM Agents
+
+将以下内容粘贴到 LLM 代理会话：
+
+```
+按照以下说明安装和配置 oh-my-novel：
+https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
+```
+
 ---
 
 ## 🚀 安装
