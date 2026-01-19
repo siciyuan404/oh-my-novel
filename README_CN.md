@@ -278,11 +278,9 @@ if command -v opencode &> /dev/null; then
     echo "OpenCode $(opencode --version) is installed"
 else
     echo "OpenCode is not installed. Please install it first."
-    echo "Ref: https://opencode.ai/docs"
-fi
+- OpenCode 版本检查：`opencode --version`
+- OpenCode 安装指南：https://opencode.ai/docs
 ```
-
-如果 OpenCode 未安装，请查看 [OpenCode 安装指南](https://opencode.ai/docs)。
 
 #### 步骤 2：运行交互式安装器
 
@@ -731,9 +729,9 @@ MIT 许可证 - 详见 LICENSE 文件。
 
 ## 📞 支持
 
-- **GitHub 仓库**：https://github.com/mxrain/oh-my-novel
-- **报告问题**：[GitHub Issues](https://github.com/mxrain/oh-my-novel/issues)
-- **讨论**：[GitHub Discussions](https://github.com/mxrain/oh-my-novel/discussions)
+- **GitHub 仓库**：https://github.com/siciyuan404/oh-my-novel
+- **报告问题**：[GitHub Issues](https://github.com/siciyuan404/oh-my-novel/issues)
+- **讨论**：[GitHub Discussions](https://github.com/siciyuan404/oh-my-novel/discussions)
 - **安装指南**：[INSTALLATION.md](./INSTALLATION.md)
 - **用户指南**：[USER_GUIDE.md](./USER_GUIDE.md)
 - **代理文档**：[AGENTS.md](./AGENTS.md)
