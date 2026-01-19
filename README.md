@@ -249,7 +249,7 @@ Paste this into your LLM agent session:
 
 ```
 Install and configure oh-my-novel by following the instructions here:
-https://raw.githubusercontent.com/mxrain/oh-my-novel/refs/heads/master/INSTALLATION.md
+https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/master/INSTALLATION.md
 ```
 
 **Alternative, Not Recommended, Do This by Yourself**
@@ -268,7 +268,7 @@ npx oh-my-novel install  # alternative
 Fetch installation guide and follow it:
 
 ```bash
-curl -s https://raw.githubusercontent.com/mxrain/oh-my-novel/refs/heads/master/INSTALLATION.md
+curl -s https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/master/INSTALLATION.md
 ```
 
 ### Prerequisites
@@ -698,9 +698,9 @@ Inspired by [oh-my-opencode](https://github.com/code-yeongyu/oh-my-opencode) by 
 
 ## 📞 Support
 
-- **GitHub Repository:** https://github.com/mxrain/oh-my-novel
-- **Report bugs:** [GitHub Issues](https://github.com/mxrain/oh-my-novel/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/mxrain/oh-my-novel/discussions)
+- **GitHub Repository:** https://github.com/siciyuan404/oh-my-novel
+- **Report bugs:** [GitHub Issues](https://github.com/siciyuan404/oh-my-novel/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/siciyuan404/oh-my-novel/discussions)
 - **Installation Guide:** [INSTALLATION.md](./INSTALLATION.md)
 - **User Guide:** [USER_GUIDE.md](./USER_GUIDE.md)
 - **Agent Documentation:** [AGENTS.md](./AGENTS.md)
