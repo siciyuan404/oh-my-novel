@@ -279,16 +279,28 @@ fi
 
 ### 步骤 2: 运行安装器
 
-根据用户的回答，使用适当的标志运行 CLI 安装器：
+**重要**：由于包尚未发布到 npm，请使用本地开发安装方式：
 
 ```bash
-bunx oh-my-novel install --no-tui --claude=<yes|no|max20> --chatgpt=<no|yes> --gemini=<no|yes>
+# 如果目录不存在，先克隆仓库
+if [ ! -d "oh-my-novel" ]; then
+    git clone https://github.com/siciyuan404/oh-my-novel.git
+    cd oh-my-novel
+    bun install
+    bun run build
+else
+    cd oh-my-novel
+fi
+
+# 运行安装器
+node dist/cli/index.js install --no-tui --claude=<yes|no|max20> --chatgpt=<no|yes> --gemini=<no|yes> --copilot=<no|yes>
 ```
 
 **示例：**
-- 用户拥有所有订阅且使用 max20：`bunx oh-my-novel install --no-tui --claude=max20 --chatgpt=yes --gemini=yes`
-- 用户只有 Claude（无 max20）：`bunx oh-my-novel install --no-tui --claude=yes --chatgpt=no --gemini=no`
-- 用户没有订阅：`bunx oh-my-novel install --no-tui --claude=no --chatgpt=no --gemini=no`
+- 用户拥有所有订阅且使用 max20：`node dist/cli/index.js install --no-tui --claude=max20 --chatgpt=yes --gemini=yes --copilot=no`
+- 用户只有 Claude（无 max20）：`node dist/cli/index.js install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
+- 用户没有订阅：`node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
+- 用户只有 GitHub Copilot：`node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=yes`
 
 CLI 将：
 - 在 `opencode.json` 中注册插件
@@ -462,16 +474,31 @@ https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/README
 
 ### 供用户使用
 
-运行交互式安装器：
+**本地开发安装**（当前唯一方式）：
 
 ```bash
-bunx oh-my-novel install  # 推荐
-npx oh-my-novel install  # npm 安装方式（等发布后）
+# 1. 克隆仓库
+git clone https://github.com/siciyuan404/oh-my-novel.git
+cd oh-my-novel
+
+# 2. 安装依赖
+bun install
+
+# 3. 构建项目
+bun run build
+
+# 4. 运行安装器（交互式）
+node dist/cli/index.js install
+
+# 或非交互式安装
+node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no
 ```
 
-> **注意**：CLI 附带所有主要平台的独立二进制文件。安装后无需运行时（Bun/Node.js）来执行 CLI。
+> **注意**：包尚未发布到 npm，`bunx oh-my-novel install` 暂时无法使用。
+>
+> **重要**：安装器需要 4 个参数：`--claude`, `--chatgpt`, `--gemini`, `--copilot`
 
-请按照提示配置你的 AI 提供商认证信息。安装完成后，在 OpenCode 中使用 `opencode auth login` 配置。
+请按照提示配置你的 AI 提供商认证信息。安装完成后，使用 `opencode auth login` 配置认证。
 
 **推荐的安装方式**：
 
@@ -482,33 +509,25 @@ npx oh-my-novel install  # npm 安装方式（等发布后）
    cd oh-my-novel
    bun install
    bun run build
-   node dist/cli/installer.js
+
+   # 交互式安装
+   node dist/cli/index.js install
+
+   # 或非交互式安装
+   node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no
    ```
 
 2. **全局安装**（等发布到 npm 后）
 
    ```bash
-   bun install -g oh-my-novel  # 等包发布后使用
+   bunx oh-my-novel install  # 等包发布后使用
    ```
 
-3. **使用 npm 安装**（等发布到 npm 后）
-   ```bash
-   npm install -g oh-my-novel  # 等包发布后使用
-   ```
-
-> **注意**：目前 `oh-my-novel` 包**尚未发布到 npm**。请使用以下本地开发安装方式：
+> **注意**：目前 `oh-my-novel` 包**尚未发布到 npm**。请使用本地开发安装方式。
 >
-> ```bash
-> git clone https://github.com/siciyuan404/oh-my-novel.git
-> cd oh-my-novel
-> bun install
-> bun run build
-> node dist/cli/installer.js
-> ```
+> **重要**：新的安装器需要 4 个参数：`--claude`, `--chatgpt`, `--gemini`, `--copilot`
 >
-> **不推荐**：不要让 LLM 代理执行安装命令，因为安装器需要手动配置。
->
-> **注意**：安装器需要手动配置 AI 提供商，无法通过 LLM 自动完成。请在 OpenCode 配置完成后使用 `opencode auth login` 配置认证。
+> **CLI 入口已更改**：使用 `node dist/cli/index.js` 而不是 `node dist/cli/installer.js`
 
 ---
 
