@@ -60,21 +60,23 @@ rg --version
 
 There are three ways to install oh-my-novel:
 
-### Method 1: Global Installation (Recommended)
+### Method 1: NPM Installation (Recommended)
 
-**Best for:** Users who want to use oh-my-novel in multiple projects.
+**Best for:** Most users who want quick and easy installation.
 
 ```bash
-# Install globally (for CLI tools)
-bun install -g oh-my-novel
+# Using bunx (recommended)
+bunx oh-my-novel@beta install
 
-# Or run via bunx if package is published
-bunx oh-my-novel install
+# Or using npx
+npx oh-my-novel@beta install
 ```
 
-### Method 2: Local Installation
+> **Note**: Currently published as beta version. Use `@beta` tag to install.
 
-**Best for:** Project-specific usage or development.
+### Method 2: Local Development Installation
+
+**Best for:** Development and testing with latest changes.
 
 ```bash
 # Clone repository
@@ -88,25 +90,19 @@ bun install
 bun run build
 
 # Run interactive installer
-bunx oh-my-novel install
+node dist/cli/index.js install
 ```
 
-### Method 3: Local Development
+### Method 3: Global NPM Installation
 
-**Best for:** Development and testing with latest changes.
-
-```bash
-# Run installer directly from local build
-node dist/cli/installer.js
-```
-
-### Method 3: Direct from GitHub (No Clone)
-
-**Best for:** Quick installation without cloning the repository.
+**Best for:** Users who want to use oh-my-novel in multiple projects.
 
 ```bash
-# Run directly from GitHub
-bunx github:mxrain/oh-my-novel install
+# Install globally
+npm install -g oh-my-novel@beta
+
+# Then run installer
+oh-my-novel install
 ```
 
 ---
@@ -116,7 +112,7 @@ bunx github:mxrain/oh-my-novel install
 The interactive installation wizard guides you through the setup process:
 
 ```bash
-bunx oh-my-novel install
+bunx oh-my-novel@beta install
 ```
 
 ### Installation Wizard Steps
@@ -180,10 +176,10 @@ Skip the wizard prompts:
 
 ```bash
 # Non-interactive mode
-bunx oh-my-novel install --no-tui
+bunx oh-my-novel@beta install --no-tui
 
-# Skip dependency checks
-bunx oh-my-novel install --skip-deps
+# With subscription flags
+bunx oh-my-novel@beta install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no
 ```
 
 ---
@@ -293,7 +289,7 @@ Higher priority files override lower priority settings.
 After installation, run the doctor command:
 
 ```bash
-bunx oh-my-novel doctor
+bunx oh-my-novel@beta doctor
 ```
 
 ### Expected Output
@@ -417,7 +413,7 @@ chmod 755 novels .oh-my-novel-state
 
 ```bash
 # Re-run the installer
-bunx oh-my-novel install
+bunx oh-my-novel@beta install
 
 # Or manually create configuration file
 mkdir -p .opencode
@@ -511,7 +507,10 @@ If you're still experiencing issues:
 ### Uninstall the Plugin
 
 ```bash
-# Uninstall globally
+# Uninstall globally (if installed globally)
+npm uninstall -g oh-my-novel
+
+# Or if installed with bun
 bun uninstall -g oh-my-novel
 ```
 

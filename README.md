@@ -243,6 +243,20 @@ Configuration files support JSONC (JSON with comments and trailing commas):
 
 ## 🚀 Installation
 
+### Quick Install (Recommended)
+
+Install from npm:
+
+```bash
+# Using bunx (recommended)
+bunx oh-my-novel@beta install
+
+# Or using npx
+npx oh-my-novel@beta install
+```
+
+> **Note**: Currently published as beta version. Use `@beta` tag to install.
+
 ### For Humans
 
 Paste this into your LLM agent session:
@@ -252,23 +266,12 @@ Install and configure oh-my-novel by following the instructions here:
 https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
 ```
 
-**Alternative, Not Recommended, Do This by Yourself**
-
-Run interactive installer:
-
-```bash
-bunx oh-my-novel install  # recommended
-npx oh-my-novel install  # alternative
-```
-
-> **Note**: The CLI ships with standalone binaries for all major platforms. No runtime (Bun/Node.js) is required for CLI execution after installation.
-
 ### For LLM Agents
 
 Fetch installation guide and follow it:
 
 ```bash
-curl -s https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/master/INSTALLATION.md
+curl -s https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/INSTALLATION.md
 ```
 
 ### Prerequisites
@@ -297,10 +300,10 @@ If OpenCode isn't installed, check [OpenCode Installation Guide](https://opencod
 
 ```bash
 # Interactive mode with prompts
-bunx oh-my-novel install
+bunx oh-my-novel@beta install
 
 # Non-interactive mode with subscription flags
-bunx oh-my-novel install --no-tui \
+bunx oh-my-novel@beta install --no-tui \
   --claude=<yes|no|max20> \
   --chatgpt=<yes|no> \
   --gemini=<yes|no> \
@@ -309,10 +312,10 @@ bunx oh-my-novel install --no-tui \
 
 **Examples:**
 
-- User has Claude (max20): `bunx oh-my-novel install --no-tui --claude=max20 --chatgpt=no --gemini=no --copilot=no`
-- User has only Claude: `bunx oh-my-novel install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
-- User has all subscriptions: `bunx oh-my-novel install --no-tui --claude=yes --chatgpt=yes --gemini=yes --copilot=no`
-- User has no subscriptions: `bunx oh-my-novel install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
+- User has Claude (max20): `bunx oh-my-novel@beta install --no-tui --claude=max20 --chatgpt=no --gemini=no --copilot=no`
+- User has only Claude: `bunx oh-my-novel@beta install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
+- User has all subscriptions: `bunx oh-my-novel@beta install --no-tui --claude=yes --chatgpt=yes --gemini=yes --copilot=no`
+- User has no subscriptions: `bunx oh-my-novel@beta install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
 
 The installer will:
 
@@ -391,7 +394,7 @@ To remove oh-my-novel:
 
 ```bash
 # Run doctor checks
-bunx oh-my-novel doctor
+bunx oh-my-novel@beta doctor
 ```
 
 Doctor checks include:

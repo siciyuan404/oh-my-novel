@@ -472,9 +472,32 @@ https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/README
 
 ## 🚀 安装
 
+### 快速安装（推荐）
+
+从 npm 安装：
+
+```bash
+# 使用 bunx（推荐）
+bunx oh-my-novel@beta install
+
+# 或使用 npx
+npx oh-my-novel@beta install
+```
+
+> **注意**：当前以 beta 版本发布。使用 `@beta` 标签安装。
+
 ### 供用户使用
 
-**本地开发安装**（当前唯一方式）：
+将以下内容粘贴到你的 LLM 代理会话中：
+
+```
+按照以下说明安装和配置：
+https://raw.githubusercontent.com/siciyuan404/oh-my-novel/refs/heads/main/README_CN.md
+```
+
+### 本地开发安装（可选）
+
+如果你想从源码安装：
 
 ```bash
 # 1. 克隆仓库
@@ -494,41 +517,6 @@ node dist/cli/index.js install
 node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no
 ```
 
-> **注意**：包尚未发布到 npm，`bunx oh-my-novel install` 暂时无法使用。
->
-> **重要**：安装器需要 4 个参数：`--claude`, `--chatgpt`, `--gemini`, `--copilot`
-
-请按照提示配置你的 AI 提供商认证信息。安装完成后，使用 `opencode auth login` 配置认证。
-
-**推荐的安装方式**：
-
-1. **本地开发安装**（当前推荐）
-
-   ```bash
-   git clone https://github.com/siciyuan404/oh-my-novel.git
-   cd oh-my-novel
-   bun install
-   bun run build
-
-   # 交互式安装
-   node dist/cli/index.js install
-
-   # 或非交互式安装
-   node dist/cli/index.js install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no
-   ```
-
-2. **全局安装**（等发布到 npm 后）
-
-   ```bash
-   bunx oh-my-novel install  # 等包发布后使用
-   ```
-
-> **注意**：目前 `oh-my-novel` 包**尚未发布到 npm**。请使用本地开发安装方式。
->
-> **重要**：新的安装器需要 4 个参数：`--claude`, `--chatgpt`, `--gemini`, `--copilot`
->
-> **CLI 入口已更改**：使用 `node dist/cli/index.js` 而不是 `node dist/cli/installer.js`
-
 ---
 
 ```bash
@@ -544,10 +532,10 @@ else
 
 ```bash
 # 交互模式，使用提示
-bunx oh-my-novel install
+bunx oh-my-novel@beta install
 
 # 非交互模式，使用订阅标志
-bunx oh-my-novel install --no-tui \
+bunx oh-my-novel@beta install --no-tui \
   --claude=<yes|no|max20> \
   --chatgpt=<yes|no> \
   --gemini=<yes|no> \
@@ -556,10 +544,10 @@ bunx oh-my-novel install --no-tui \
 
 **示例：**
 
-- 用户有所有订阅（含 max20）：`bunx oh-my-novel install --no-tui --claude=max20 --chatgpt=yes --gemini=yes --copilot=no`
-- 用户只有 Claude（无 max20）：`bunx oh-my-novel install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
-- 用户只有 GitHub Copilot：`bunx oh-my-novel install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=yes`
-- 用户没有订阅：`bunx oh-my-novel install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
+- 用户有所有订阅（含 max20）：`bunx oh-my-novel@beta install --no-tui --claude=max20 --chatgpt=yes --gemini=yes --copilot=no`
+- 用户只有 Claude（无 max20）：`bunx oh-my-novel@beta install --no-tui --claude=yes --chatgpt=no --gemini=no --copilot=no`
+- 用户只有 GitHub Copilot：`bunx oh-my-novel@beta install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=yes`
+- 用户没有订阅：`bunx oh-my-novel@beta install --no-tui --claude=no --chatgpt=no --gemini=no --copilot=no`
 
 安装器会执行以下操作：
 
@@ -636,7 +624,7 @@ opencode auth login
 
 ```bash
 # 运行健康检查
-bunx oh-my-novel doctor
+bunx oh-my-novel@beta doctor
 ```
 
 健康检查包括：
