@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n重构安装器：对齐 oh-my-opencode 标准\n\n主要改进：\n- 创建 config-manager.ts 模块化配置管理\n- 重构 installer.ts 为 install.ts，使用 @clack/prompts\n- 添加 types.ts 类型定义\n- 更新 CLI 入口文件 index.ts\n- 删除旧的 installer.ts（包含重复代码）\n- 添加完整的 LLM 代理安装指南到 README_CN.md\n\n新特性：\n- ✨ 使用 @clack/prompts 提供现代化交互式 UI\n- 🎨 使用 picocolors 提供美观的颜色输出\n- 📊 清晰的步骤显示和进度反馈\n- 🔄 支持配置检测和更新模式\n- ✅ 完善的错误处理和验证\n- 📚 支持通过提示词让 LLM 代理自动安装\n\n修复：\n- ❌ 删除了重复代码（原 installer.ts 第 425-509 行）\n- ✅ 统一配置管理逻辑\n- ✅ 支持 JSONC 格式（带注释的 JSON）\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "WebFetch(domain:opncd.ai)",
+      "Bash(npm run build)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n修复关键构建错误\n\n修复问题：\n- 修复 tsconfig.json 重复内容（第 25-28 行）\n- 删除 hooks/index.ts 中 135 行重复代码（第 129-263 行）\n- 修复 hooks/index.ts 导入路径错误\n\n这些是用户在 https://opncd.ai/share/rTmB3Myf 中遇到的主要问题。\n\n剩余的 TypeScript 错误需要进一步修复，但核心的重复代码问题已解决。\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }
