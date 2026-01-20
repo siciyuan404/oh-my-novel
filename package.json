@@ -40,8 +40,10 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit --skipLibCheck",
-    "prepublishOnly": "npm run build",
-    "postinstall": "node postinstall.mjs"
+    "prepack": "node scripts/pre-publish.js",
+    "prepublishOnly": "echo Skipping build, using existing dist",
+    "postinstall": "node postinstall.mjs",
+    "publish:interactive": "node scripts/publish.js"
   },
   "keywords": [
     "opencode",
@@ -74,9 +76,9 @@
     "oh-my-novel-windows-x64": "1.0.0"
   },
   "bin": {
-    "oh-my-novel": "./bin/oh-my-novel.js",
-    "oh-my-novel-installer": "./bin/oh-my-novel.js",
-    "oh-my-novel-doctor": "./dist/cli/doctor.js"
+    "oh-my-novel": "bin/oh-my-novel.js",
+    "oh-my-novel-installer": "bin/oh-my-novel.js",
+    "oh-my-novel-doctor": "dist/cli/doctor.js"
   },
   "devDependencies": {
     "@types/node": "^25.0.9",
@@ -87,7 +89,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/siciyuan404/oh-my-novel.git"
+    "url": "git+https://github.com/siciyuan404/oh-my-novel.git"
   },
   "bugs": {
     "url": "https://github.com/siciyuan404/oh-my-novel/issues"

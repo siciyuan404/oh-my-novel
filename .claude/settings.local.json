@@ -7,7 +7,17 @@
       "WebFetch(domain:opncd.ai)",
       "Bash(npm run build)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\n修复关键构建错误\n\n修复问题：\n- 修复 tsconfig.json 重复内容（第 25-28 行）\n- 删除 hooks/index.ts 中 135 行重复代码（第 129-263 行）\n- 修复 hooks/index.ts 导入路径错误\n\n这些是用户在 https://opncd.ai/share/rTmB3Myf 中遇到的主要问题。\n\n剩余的 TypeScript 错误需要进一步修复，但核心的重复代码问题已解决。\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\n更新 README：修正本地开发安装说明\n\n修复问题：\n- 更新 CLI 入口路径：dist/cli/index.js（不是 installer.js）\n- 添加 --copilot 参数说明（新安装器需要 4 个参数）\n- 明确说明包尚未发布到 npm\n- 提供完整的本地开发安装步骤\n\n这解决了用户在 https://opncd.ai/share/TIZtiWex 中遇到的问题：\n1. 错误的 CLI 路径\n2. 缺少 --copilot 参数\n3. 不清楚的安装步骤\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n更新 README：修正本地开发安装说明\n\n修复问题：\n- 更新 CLI 入口路径：dist/cli/index.js（不是 installer.js）\n- 添加 --copilot 参数说明（新安装器需要 4 个参数）\n- 明确说明包尚未发布到 npm\n- 提供完整的本地开发安装步骤\n\n这解决了用户在 https://opncd.ai/share/TIZtiWex 中遇到的问题：\n1. 错误的 CLI 路径\n2. 缺少 --copilot 参数\n3. 不清楚的安装步骤\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(wc:*)",
+      "Bash(npm whoami:*)",
+      "Bash(npm config list:*)",
+      "Bash(npm config set:*)",
+      "Bash(npm config:*)",
+      "Bash(npm config get:*)",
+      "Bash(npm publish:*)",
+      "Bash(npm pkg fix:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n更新安装文档：添加 npm 安装方式\n\n- 添加 npm/bunx 快速安装方式（推荐）\n- 更新所有安装命令使用 @beta 标签\n- 移除\"包尚未发布\"的提示\n- 重新组织安装方法优先级\n- 更新 README.md、README_CN.md 和 INSTALLATION.md\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
     ]
   }
 }

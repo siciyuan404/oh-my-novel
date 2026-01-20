@@ -3,6 +3,10 @@ src/
 script/
 types/
 
+# Keep these important files
+!bin/
+!postinstall.mjs
+
 # Build artifacts
 dist/**/*.d.ts
 dist/**/*.d.ts.map
